@@ -5,7 +5,7 @@ Este programa le podrá permitir al usuario ingresar un producto, cuánto vale y
 
 ## Diagrama de flujo:
 
-![alt text](image.png)
+![alt text](diagrama_de_flujo.png)
 
 ## ¿Cómo funciona?
 
