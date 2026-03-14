@@ -1,18 +1,6 @@
-#Este while true nos permite en un bucle, seguir en la misma función en caso de que ingresemos algo inválido, en precio del producto
-while True:
-    #Aquí le pedimos el nombre del producto al usuario
+   #Aquí le pedimos el nombre del producto al usuario
     nombre_producto = input("Ingrese el nombre del producto: \n")
-
-    #Este bucle se repite hasta que el usuario ingrese un nombre válido.
-    #Verifica que el texto contenga al menos una letra,
-    #permitiendo números o símbolos pero no solos de por sí
-    #(Es lo único que encontré para poder hacerlo así, no encontré otra manera sin este if)
-    if any(letra.isalpha() for letra in nombre_producto):
-        break
-    else:
-        print("Valor no válido. El nombre debe contener al menos una letra.")
-
-
+#Este while true nos permite en un bucle, seguir en la misma función en caso de que ingresemos algo inválido, en precio del producto
 
 while True:
     try:                  #Aquí convertimos el precio del producto en un float para que solo se puedan ingresar números, y en caso de una letra, ir al except
