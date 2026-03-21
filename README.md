@@ -2,7 +2,7 @@
 ## Diagrama de flujo
 
 
-![Diagrama de flujo](diagrama_De_Flujo.png)
+![Diagrama de flujo](Diagrama_De_Flujo.png)
 ## Descripcion:
 
 Este proyecto es un sistema de gestión de inventarios, hecho en **Python**.  
