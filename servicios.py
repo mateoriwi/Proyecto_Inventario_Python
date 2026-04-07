@@ -1,51 +1,56 @@
-def agregar_producto(inventario):
-        nombre = input("¿Cuál es el nombre del producto?\n")
-
-        while True:            
-            try:
-                precio = float(input("¿Cuál es el precio del producto?\n"))
-                if precio < 0:
-                    print("El precio no puede ser negativo")
-                    continue
-                break
-            except ValueError:
-                print("Error: Solo puede poner números o decimales")
-            
-        while True:
-            try:
-                cantidad = int(input("¿Cuántas unidades de su producto desea ingresar?\n"))
-                if cantidad < 0:
-                    print("La cantidad no puede ser negativa")
-                    continue
-                break
-            except ValueError:
-                print("Solo puede poner números sin decimales")
-
-        bruto = precio * cantidad 
-        impuesto = (bruto * 0.19)
-        definitivo = bruto + impuesto
-
-
-        producto_ficha = {
-        "nombre":nombre,
-        "precio":precio,
-        "cantidad":cantidad,
-        "valor_iva":impuesto,
-        "total":definitivo,
-        }
-
-        inventario.append(producto_ficha)
-
-        print(f"El producto, {nombre} cuesta, {precio} e ingresará, {cantidad} unidades. ")
-        print(f"El impuesto es {impuesto:.2f}")
-        print(f"El costo total con la importación y la cantidad es de {definitivo:.2f}")
-        print(f"El inventario tiene {inventario}")
-        print(f"El producto fue añadido con éxito")
+def agregar_producto(inventario, nombre, precio, cantidad):
+    producto = {"nombre": nombre, "precio": precio, "cantidad": cantidad}
+    inventario.append(producto)
 
 def mostrar_inventario(inventario):
-    print(f"Mostrando inventario")
-    print(f"{inventario}")
 
-def salida_programa():
-        print(f"Saliendo del programa")
-        exit()
+    if not inventario:
+        print("\n[!] El inventario está vacío.")
+        return
+    print(f"\n{'Nombre':<20} | {'Precio':<10} | {'Cantidad':<10}")
+    print("-" * 45)
+    for p in inventario:
+        print(f"{p['nombre']:<20} | ${p['precio']:<9.2f} | {p['cantidad']:<10}")
+
+def buscar_producto(inventario, nombre):
+    for p in inventario:
+        if p["nombre"].lower() == nombre.lower():
+            return p
+    return None
+
+def eliminar_producto(inventario, nombre):
+   
+    p = buscar_producto(inventario, nombre)
+    if p:
+        inventario.remove(p)
+        return True
+    return False
+
+def calcular_estadisticas(inventario):
+
+    if not inventario:
+        return None
+    
+    unidades_totales = 0
+    valor_total = 0
+    prod_caro = inventario[0]
+    prod_stock = inventario[0]
+
+    for p in inventario:
+        unidades_totales += p["cantidad"]
+        valor_total += (p["precio"] * p["cantidad"])
+        
+        
+        if p["precio"] > prod_caro["precio"]:
+            prod_caro = p
+            
+      
+        if p["cantidad"] > prod_stock["cantidad"]:
+            prod_stock = p
+
+    return {
+        "unidades": unidades_totales,
+        "valor": valor_total,
+        "caro": prod_caro,
+        "stock": prod_stock
+    }
